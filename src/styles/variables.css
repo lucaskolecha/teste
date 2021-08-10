@@ -1,0 +1,27 @@
+:root {
+  --background: #f4f9ff;
+  --alterBackground: #fff;
+  --primary: #0288d1;
+  --lightPrimary: #c9ecff;
+  --whiteColor: #fff;
+  --grayColor: #172b40;
+  --lightGrayColor: #b5b5b5;
+  --normalGrayColor: #87949e;
+  --inputBgColor: #f9f9f9;
+  --rightLogin: #1e293b;
+  --descriptionRightLogin: #cccccc;
+}
+
+/* :root {
+--background: #404040;
+--alterBackground: #4e4e4e;
+--primary: #0288d1;
+--lightPrimary: #4e4e4e;
+--whiteColor: #fff;
+--grayColor: #fff;
+--lightGrayColor: #b5b5b5;
+--normalGrayColor: #87949e;
+--inputBgColor: #676767;
+--rightLogin: #1e293b;
+--descriptionRightLogin: #cccccc;
+} */
