@@ -1,18 +1,27 @@
 import axios from 'axios';
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 
 import Page from '../components/common/Page';
 const Home: React.FC = () => {
+  //Declaração de estado array - pode ser visto como variável -- "repositories" -> Nome dela | "setRepositories" -> função que seta valor no "repositories"
   const [repositories, setRepositories] = useState([]);
+  //Declaração de estado string - pode ser visto como variável
   const [text, setText] = useState('');
 
+  //OnInit da página -- Ao iniciar a página ele executa tudo que está dentro dessa função
+  useEffect(() => {}, []);
+
+  //Função executada ao clicar no botão
   const onSearch = () => {
     axios.get(`https://api.github.com/users/${text}/repos`).then((response) => {
+      //Seta o valor da API na variável repositories
       setRepositories(response.data);
     });
   };
 
+  //Retorno do HTML com as implementações do javascript (TSX)
   return (
     <Page title="Página Principal">
       <div className="flex items-center justify-center flex-col h-full overflow-auto">
