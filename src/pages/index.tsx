@@ -11,7 +11,9 @@ const Home: React.FC = () => {
   const [text, setText] = useState('');
 
   //OnInit da página -- Ao iniciar a página ele executa tudo que está dentro dessa função
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //Código aqui
+  }, []);
 
   //Função executada ao clicar no botão
   const onSearch = () => {
