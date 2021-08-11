@@ -2,51 +2,43 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
 import Page from '../components/common/Page';
-const Home: React.FC = () => {
-  //Declaração de estado array - pode ser visto como variável -- "repositories" -> Nome dela | "setRepositories" -> função que seta valor no "repositories"
-  const [repositories, setRepositories] = useState([]);
-  //Declaração de estado string - pode ser visto como variável
-  const [text, setText] = useState('');
 
-  //OnInit da página -- Ao iniciar a página ele executa tudo que está dentro dessa função
+const Home: React.FC = () => {
+  const [repositories, setRepositories] = useState<any[]>([]);
+  const [text, setText] = useState('');
   useEffect(() => {
-    //Código aqui
+    axios
+      .get(`https://w3rakeqchc.execute-api.us-east-2.amazonaws.com/dev/meals`)
+      .then((response) => {
+        console.log(response.data);
+        setRepositories(response.data);
+      });
   }, []);
 
-  //Função executada ao clicar no botão
-  const onSearch = () => {
-    axios.get(`https://api.github.com/users/${text}/repos`).then((response) => {
-      //Seta o valor da API na variável repositories
-      setRepositories(response.data);
-    });
-  };
-
-  //Retorno do HTML com as implementações do javascript (TSX)
   return (
-    <Page title="Página Principal">
-      <div className="flex items-center justify-center flex-col h-full overflow-auto">
-        <h1 className="text-xl my-7">Github</h1>
-        <input
-          className="h-10 rounded-md border border-gray-200 px-4"
-          value={text}
-          onChange={(evt) => setText(evt.target.value)}
-        />
-        <button
-          type="button"
-          className="h-11 px-4 bg-gray-500 text-white rounded-md mt-4"
-          onClick={() => onSearch()}
-        >
-          Pesquisar
-        </button>
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-2/4 mt-8">
-          {repositories.map((repo) => (
-            <div className="bg-gray-200 flex items-center justify-center h-32">{repo.name}</div>
-          ))}
+    <>
+      <Page title="Página Principal">
+        <div className="flex items-center justify-center flex-col h-full overflow-auto">
+          <h1 className="text-xl my-7">What's on your mind?</h1>
+          <div className="grid grid-cols-4 grid-rows-4 gap-8 w-2/4 mt-8">
+            {repositories.map((repo) => (
+              <div className="flex items-center justify-center flex-col mt-8" key={repo.idMeal}>
+                <img src={repo.strMealThumb} alt={repo.strMeal} width="100"></img>
+                <p className="text-center mt-4">
+                  <span className="font-bold">Descrição:</span>
+                  <br /> Teste descrição
+                </p>
+                <p className="text-center mt-4">
+                  <span className="font-bold">Modo de preparo:</span>
+                  <br /> Teste Modo de preparo
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </Page>
+      </Page>
+    </>
   );
 };
 
