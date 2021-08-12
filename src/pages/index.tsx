@@ -9,6 +9,7 @@ const Home: React.FC = () => {
   const [repositories, setRepositories] = useState<any[]>([]);
   const [text, setText] = useState('');
   useEffect(() => {
+    console.log('ASIhdaiusdhuiashd');
     axios.get('https://ana-personal-project.herokuapp.com/meal').then((response) => {
       setRepositories(response.data[0].meals);
     });
